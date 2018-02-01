@@ -1,0 +1,8 @@
+[package]
+name = "swarm-rust"
+version = "0.1.0"
+authors = ["mate.magyari@gmail.com"]
+
+[dependencies]
+maplit = "1.0.1"
+rand = "0.4"

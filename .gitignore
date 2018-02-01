@@ -1,0 +1,10 @@
+target/
+
+Cargo.lock
+
+# Mac OS specific
+**/.DS_Store
+
+# Intellij specific
+.idea/
+*.iml
