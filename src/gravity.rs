@@ -1,11 +1,8 @@
-use vectoralgebra::polar_vector::PolarVector;
 use vectoralgebra::cartesian_vector::CartesianVector;
 use vectoralgebra::cartesian_vector::ZERO;
 use vectoralgebra::point::Point;
-use std::cmp;
 use swarm;
 use swarm::Entity;
-use std::collections::HashMap;
 
 //Gravity vector from point A to B. Direction depends on the points, the length
 //is the square root of the distance between them and the gravitation constant
