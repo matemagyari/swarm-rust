@@ -1,6 +1,7 @@
 mod vectoralgebra;
 mod gravity;
 mod swarm;
+mod wild;
 
 use vectoralgebra::cartesian_vector::CartesianVector;
 use vectoralgebra::point::Point;

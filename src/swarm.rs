@@ -9,7 +9,7 @@ extern crate rand;
 pub enum EntityType {
     DeadSheep,
     Sheep,
-    Wolf,
+    Wolf, //todo - wolf has a kill_range attribute. it will change the structs a bit
     Wall,
 }
 
@@ -55,7 +55,7 @@ pub fn next_position(global_constants: &GlobalConstants, entity: &Entity, entiti
             let rotation = deviation(&entity.stray_tendency, rand_num);
             total_g_vector.rotate(rotation)
         };
-        adjusted_g_vector.normalize().multiply(speed).addToPoint(&position)
+        adjusted_g_vector.normalize().multiply(speed).add_to_point(&position)
     } else {
         position
     }
@@ -67,27 +67,19 @@ pub trait RandomGenerator {
     }
 }
 
+pub trait IdGenerator {
+    fn next(&self) -> i32;
+}
+
 //Calculate the next positions of the entities
 pub fn next_positions(
     global_constants: &GlobalConstants,
-    mut entities: Vec<Entity>,
-    random_generator: &RandomGenerator) {
+    entities: Vec<Entity>,
+    random_generator: &RandomGenerator) -> Vec<Point> {
 
-    (0..entities.len()).for_each(|i| {
-
-        let others = entities.iter().filter(|e| e.id != entities[i].id).map(|e| *e).collect();
+    entities.iter().map(|entity| {
+        let others: Vec<Entity> = entities.iter().filter(|e| e.id != entity.id).map(|e| e.clone()).collect();
         let random_number = random_generator.next();
-        let next_position = next_position(global_constants, &entities[i], others, random_number);
-        entities[i] = entities[i];
-    })
-
-//    entities.iter().map(|entity| {
-//
-//        //todo - why the hell do I need the map??
-//        let others = entities.iter().filter(|e| e.id != entity.id).collect();
-//
-//        let random_number = random_generator.next();
-//        let next_position = next_position(global_constants, &entity, others, random_number);
-//        Entity { position: next_position, ..entity.clone() }
-//    })
+        next_position(global_constants, entity, others, random_number)
+    }).collect()
 }

@@ -18,7 +18,7 @@ impl CartesianVector {
         CartesianVector { x: self.x + other.x, y: self.y + other.y }
     }
 
-    pub fn addToPoint(&self, other: &Point) -> Point {
+    pub fn add_to_point(&self, other: &Point) -> Point {
         Point { x: self.x + other.x, y: self.y + other.y }
     }
 
